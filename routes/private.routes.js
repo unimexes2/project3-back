@@ -17,7 +17,7 @@ router.post('/addDog', (req, res, next) => {
         pictures:[], 
         description, 
         admitionDate, 
-        views
+        views,
     
     } = req.body;
 
@@ -45,3 +45,5 @@ router.post('/addCat', (req, res, next) => {
 		.then((response) => res.json(response))
 		.catch((err) => res.json(err));
 });
+
+module.exports = router; 

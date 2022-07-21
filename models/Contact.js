@@ -8,4 +8,4 @@ const contacSchema = new Schema({
   phone: Number
 });
 
-module.exports = model("Contact", userSchema);
+module.exports = model("Contact", contacSchema);

@@ -7,7 +7,7 @@ const dogSchema = new Schema({
   age: Number,
   weight: String,
   profilePicture: String,
-  pictures: [],
+  pictures: [String],
   description: String,
   admitionDate: Date,
   views: String,
