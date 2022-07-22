@@ -8,7 +8,7 @@ const Contact = require("../models/Contact.js")
 
 // GET  Retrieves all of dogs
 router.get("/dogs", (req, res, next) => {
-    Project.find()
+    Dog.find()
       .populate("Contact")
       .then((allDogs) => res.json(allDogs))
       .catch((err) => res.json(err));
@@ -16,7 +16,7 @@ router.get("/dogs", (req, res, next) => {
 
 // GET  Retrieves all of cats
 router.get("/cats", (req, res, next) => {
-    Project.find()
+    Cat.find()
       .populate("Contact")
       .then((allCats) => res.json(allCats))
       .catch((err) => res.json(err));

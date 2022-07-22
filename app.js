@@ -26,7 +26,7 @@ const privateRouter = require("./routes/private.routes");
 app.use("/", privateRouter);         
 
 const publicRouter = require("./routes/public.routes");
-app.use("/api", publicRouter);         
+app.use("/", publicRouter);         
 
 
 // app.use((req, res, next) => {
