@@ -22,15 +22,17 @@ router.post('/add', (req, res, next) => {
     
     } = req.body;
 
-    // if(req.body.type === "Dog"){
-    //     	Dog.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
-	// 	.then((response) => res.json(response))
-	// 	.catch((err) => res.json(err));
-    // }else{
-    //     Cat.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
-	// 	.then((response) => res.json(response))
-	// 	.catch((err) => res.json(err));
-    // }
+    if(req.body.type === ""){
+        console.log('dog');
+        	Dog.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+    }else{
+        console.log('cat');
+        Cat.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+    }
 
 
 });
