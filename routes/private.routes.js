@@ -53,7 +53,7 @@ router.post('/addCat', (req, res, next) => {
 
 
 
-router.get("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+router.post("/upload", (req, res, next) => {
 
     console.log("file is: ", req.file)
   
