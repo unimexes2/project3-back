@@ -10,8 +10,11 @@ const saltRounds = 10;
 
 // POST /signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
-	const { email, password, name } = req.body;
 
+
+
+	const { email, password, name } = req.body;
+/*
 	// Check if email or password or name are provided as empty string
 	if (email === '' || password === '' || name === '') {
 		res.status(400).json({ message: 'Provide email, password and name' });
@@ -34,7 +37,7 @@ router.post('/signup', (req, res, next) => {
 		});
 		return;
 	}
-
+*/
 	// Check the users collection if a user with the same email already exists
 	Admin.findOne({ email })
 		.then((foundUser) => {

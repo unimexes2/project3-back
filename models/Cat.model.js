@@ -7,7 +7,7 @@ const catSchema = new Schema({
   age: Number,
   weight: String,
   profilePicture: String,
-  pictures: [String],
+  pictures: [],
   description: String,
   admitionDate: Number,
   views: Number,

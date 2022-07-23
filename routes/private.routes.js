@@ -10,61 +10,55 @@ const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
 const fileUploader = require("../config/cloudinary.config");
 //  POST Creates a new dog for adoption
-router.post('/add', (req, res, next) => {
-    console.log('Respuesta type', req.body)
+router.post('/adddog', (req, res, next) => {
+  console.log(req.body)
 	const { 
         name, 
         breed, 
         age, 
         weight, 
         profilePicture, 
-        pictures:[], 
+        pictures, 
         description, 
         admitionDate, 
         views,
     
     } = req.body;
 
-    if(req.body.type === ""){
-        console.log('dog');
-        	Dog.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
-		.then((response) => res.json(response))
+	Dog.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views})
+		.then((response) => {
+      
+      console.log(response)
+      return res.json(response)})
 		.catch((err) => res.json(err));
-    }else{
-        console.log('cat');
-        Cat.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
-		.then((response) => res.json(response))
-		.catch((err) => res.json(err));
-    }
-
-
 });
 
-// //  POST Creates a new cat for adoption
-// router.post('/addCat', (req, res, next) => {
-// 	const { 
-//         name, 
-//         breed, 
-//         age, 
-//         weight, 
-//         profilePicture, 
-//         pictures:[], 
-//         description, 
-//         admitionDate, 
-//         views
+//  POST Creates a new cat for adoption
+router.post('/addcat', (req, res, next) => {
+  console.log(req.body)
+	const { 
+        name, 
+        breed, 
+        age, 
+        weight, 
+        profilePicture, 
+        pictures,
+        description, 
+        admitionDate, 
+        views
     
-//     } = req.body;
+    } = req.body;
 
-// 	Cat.create({ name, breed, age, weight, profilePicture, pictures:[], description, admitionDate, views})
-// 		.then((response) => res.json(response))
-// 		.catch((err) => res.json(err));
-// });
-
-
+	Cat.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views})
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+});
 
 
 
-router.post("/upload", (req, res, next) => {
+
+
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
 
     console.log("file is: ", req.file)
   
