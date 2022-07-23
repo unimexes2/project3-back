@@ -9,8 +9,8 @@ const dogSchema = new Schema({
   profilePicture: String,
   pictures: [String],
   description: String,
-  admitionDate: Date,
-  views: String,
+  admitionDate: Number,
+  views: Number,
   adminID: [{ type: Schema.Types.ObjectId, ref: "Admin" }],
   contactPerson: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
 });

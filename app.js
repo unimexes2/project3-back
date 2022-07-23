@@ -23,10 +23,10 @@ app.use("/api/auth", authRouter);
 // app.use("/api",isAuthenticated, taskRouter);            // <== UPDATE
 
 const privateRouter = require("./routes/private.routes");
-app.use("/api", privateRouter);         
+app.use("/", privateRouter);         
 
 const publicRouter = require("./routes/public.routes");
-app.use("/api", publicRouter);         
+app.use("/", publicRouter);         
 
 
 // app.use((req, res, next) => {
