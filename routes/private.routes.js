@@ -54,6 +54,37 @@ router.post('/addcat', (req, res, next) => {
 		.catch((err) => res.json(err));
 });
 
+router.post('/addstories', (req, res, next) => {
+  console.log(req.body)
+	const { 
+    header,
+    description,
+    pictures,
+    contactPerson
+    
+    } = req.body;
+
+	Stories.create({ header,description,pictures,contactPerson})
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+});
+
+router.post('/addmap', (req, res, next) => {
+  console.log(req.body)
+	const { 
+    mapCode,
+  description
+    
+    } = req.body;
+
+	Stories.create({ mapCode,description})
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+});
+
+
+
+
 
 
 
