@@ -4,12 +4,14 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const ObjectId = require('mongodb').ObjectId
 
 const Cat = require("../models/Cat.model.js")
 const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
 const Map =require("../models/Map.model")
 const fileUploader = require("../config/cloudinary.config");
+
 //  POST Creates a new dog for adoption
 router.post('/adddog', (req, res, next) => {
   console.log(req.body)
@@ -117,8 +119,40 @@ router.delete('/dogs/:dogId', (req, res, next) => {
 });
 
 
+//  GET /api/projects/:projectId -  Retrieves a specific project by id
+router.get('/dogs/:dogId', (req, res, next) => {
+  const { dogId } = req.params;
+ 
+  if (!mongoose.Types.ObjectId.isValid(dogId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+// console.log(dogId)
+  Dog.findOne({_id: ObjectId(dogId)})
+   .then(dog => {
+    //console.log(req,dogId)
+    
+    res.status(200).json(dog)})
+    .catch(error => res.json(error));
+}
 
 
+);
+
+
+// PUT dogs/:dogId  -  Updates a specific project by id
+router.put('/dogs/:dogId', (req, res, next) => {
+  const { dogId } = req.params;
+ 
+  if (!mongoose.Types.ObjectId.isValid(dogId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+ 
+  Project.findByIdAndUpdate(dogId, req.body, { new: true })
+    .then((updatedDog) => res.json(updatedDog))
+    .catch(error => res.json(error));
+});
 
 router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
 
