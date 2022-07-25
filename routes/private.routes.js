@@ -84,7 +84,37 @@ router.post('/addmap', (req, res, next) => {
 });
 
 
+// DELETE  /cats/:catId  -  Deletes a specific cat by id
+router.delete('/cats/:catId', (req, res, next) => {
+  const { catId } = req.params;
 
+  console.log(req.params)
+  
+  if (!mongoose.Types.ObjectId.isValid(catId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+ 
+  Cat.findByIdAndRemove(catId)
+    .then(() => res.json({ message: `Project with ${projectId} is removed successfully.` }))
+    .catch(error => res.json(error));
+});
+
+// DELETE  /dogs/:dogId  -  Deletes a specific dog by id
+router.delete('/dogs/:dogId', (req, res, next) => {
+  const { dogId } = req.params;
+
+  console.log(req.params)
+  
+  if (!mongoose.Types.ObjectId.isValid(dogId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+ 
+  Dog.findByIdAndRemove(dogId)
+    .then(() => res.json({ message: `Dog with ${projectId} is removed successfully.` }))
+    .catch(error => res.json(error));
+});
 
 
 
