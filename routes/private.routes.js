@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const Cat = require("../models/Cat.model.js")
 const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
+const Map =require("../models/Map.model")
 const fileUploader = require("../config/cloudinary.config");
 //  POST Creates a new dog for adoption
 router.post('/adddog', (req, res, next) => {
@@ -77,7 +78,7 @@ router.post('/addmap', (req, res, next) => {
     
     } = req.body;
 
-	Stories.create({ mapCode,description})
+	Map.create({ mapCode,description})
 		.then((response) => res.json(response))
 		.catch((err) => res.json(err));
 });
