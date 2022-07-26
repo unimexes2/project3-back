@@ -5,7 +5,6 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const ObjectId = require('mongodb').ObjectId
-
 const Cat = require("../models/Cat.model.js")
 const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
@@ -27,10 +26,11 @@ router.post('/adddog', (req, res, next) => {
         description, 
         admitionDate, 
         views,
+        sex
     
     } = req.body;
 
-	Dog.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views})
+	Dog.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views,sex})
 		.then((response) => {
       
       console.log(response)
@@ -50,11 +50,12 @@ router.post('/addcat', (req, res, next) => {
         pictures,
         description, 
         admitionDate, 
-        views
+        views,
+        sex
     
     } = req.body;
 
-	Cat.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views})
+	Cat.create({ name, breed, age, weight, profilePicture, pictures, description, admitionDate, views,sex})
 		.then((response) => res.json(response))
 		.catch((err) => res.json(err));
 });
