@@ -10,6 +10,7 @@ const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
 const Map =require("../models/Map.model")
 const fileUploader = require("../config/cloudinary.config");
+const Stories=require("../models/Stories.model")
 //  POST Creates a new dog for adoption
 router.post('/adddog', (req, res, next) => {
   console.log(req.body)
@@ -55,7 +56,7 @@ router.post('/addcat', (req, res, next) => {
 		.catch((err) => res.json(err));
 });
 
-router.post('/addstories', (req, res, next) => {
+router.post('/addstory', (req, res, next) => {
   console.log(req.body)
 	const { 
     header,
@@ -82,6 +83,18 @@ router.post('/addmap', (req, res, next) => {
 		.then((response) => res.json(response))
 		.catch((err) => res.json(err));
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // DELETE  /cats/:catId  -  Deletes a specific cat by id
