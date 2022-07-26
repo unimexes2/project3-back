@@ -164,7 +164,7 @@ router.put('/dogs/:dogId', (req, res, next) => {
     return;
   }
  
-  Project.findByIdAndUpdate(dogId, req.body, { new: true })
+  Dog.findByIdAndUpdate(dogId, req.body, { new: true })
     .then((updatedDog) => res.json(updatedDog))
     .catch(error => res.json(error));
 });
