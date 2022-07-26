@@ -12,6 +12,7 @@ const dogSchema = new Schema({
   admitionDate: String,
   views: Number,
   isAdopted:Boolean,
+  sex:String,
   adminID: [{ type: Schema.Types.ObjectId, ref: "Admin" }],
   contactPerson: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
 });
