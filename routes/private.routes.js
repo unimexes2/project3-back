@@ -1,16 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const ObjectId = require("mongodb").ObjectId;
 
-const Cat = require("../models/Cat.model.js");
-const Dog = require("../models/Dog.model.js");
-const Contact = require("../models/Contact.js");
-const Map = require("../models/Map.model");
+const ObjectId = require('mongodb').ObjectId
+const Cat = require("../models/Cat.model.js")
+const Dog = require("../models/Dog.model.js")
+const Contact = require("../models/Contact.js")
+const Map =require("../models/Map.model")
+
 const fileUploader = require("../config/cloudinary.config");
 const Stories = require("../models/Stories.model");
 
 //  POST Creates a new dog for adoption
+
 router.post("/adddog", (req, res, next) => {
   console.log(req.body);
   const {
@@ -53,6 +55,7 @@ router.post("/addcat", (req, res, next) => {
     weight,
     profilePicture,
     pictures,
+
     description,
     admitionDate,
     views,

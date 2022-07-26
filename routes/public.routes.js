@@ -23,12 +23,7 @@ router.get("/cats", (req, res, next) => {
       .then((allCats) => res.json(allCats))
       .catch((err) => res.json(err));
 });
-router.get("/stories", (req, res, next) => {
-  Stories.find()
-    
-    .then((allStories) => res.json(allStories))
-    .catch((err) => res.json(err));
-});
+
 router.get("/map", (req, res, next) => {
  Map.find()
     
@@ -36,6 +31,11 @@ router.get("/map", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-
+router.get("/stories", (req, res, next) => {
+ Stories.find()
+     
+     .then((mapUser) => res.json(mapUser))
+     .catch((err) => res.json(err));
+ });
 
 module.exports = router;

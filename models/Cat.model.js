@@ -9,9 +9,10 @@ const catSchema = new Schema({
   profilePicture: String,
   pictures: [],
   description: String,
-  admitionDate: Number,
+  admitionDate: String,
   views: Number,
   isAdopted:Boolean,
+  sex:String,
   adminID: [{ type: Schema.Types.ObjectId, ref: "Admin" }],
   contactPerson: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
 });
