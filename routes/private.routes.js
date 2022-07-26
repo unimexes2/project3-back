@@ -11,11 +11,9 @@ const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
 const Map =require("../models/Map.model")
 const fileUploader = require("../config/cloudinary.config");
-<<<<<<< HEAD
 const Stories=require("../models/Stories.model")
-=======
 
->>>>>>> d197fc2a068a96e235e97802db081dfe9b2bfc5e
+
 //  POST Creates a new dog for adoption
 router.post('/adddog', (req, res, next) => {
   console.log(req.body)
