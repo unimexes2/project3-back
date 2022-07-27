@@ -55,7 +55,7 @@ router.post("/addcat", (req, res, next) => {
     weight,
     profilePicture,
     pictures,
-
+sex,
     description,
     admitionDate,
     views,
