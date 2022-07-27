@@ -94,9 +94,9 @@ router.post("/addstory", (req, res, next) => {
 
 router.post("/adddonation", (req, res, next) => {
   console.log(req.body);
-  const { header, description, pictures, contactPerson } = req.body;
+  const { bankName, account, paypal, bizum } = req.body;
 
-  Donation.create({ header, description, pictures, contactPerson })
+  Donation.create({ bankName, account, paypal, bizum })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });

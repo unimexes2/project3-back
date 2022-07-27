@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const siteSchema = new Schema({
-logo: String,
+  logo: String,
   navbarlogo: String,
-  devise: String
+  devise: String,
+  carusel:String
 
 });
 

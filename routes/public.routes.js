@@ -7,11 +7,17 @@ const Dog = require("../models/Dog.model.js")
 const Contact = require("../models/Contact.js")
 const Stories= require("../models/Stories.model.js")
 const Map =require("../models/Map.model.js")
+const Donation=require("../models/Donation.model.js")
 
 // GET  Retrieves all of contacts
 router.get("/contacts", (req, res, next) => {
     Contact.find()
       .then((allContacts) => res.json(allContacts))
+      .catch((err) => res.json(err));
+});
+router.get("/donations", (req, res, next) => {
+    Donation.find()
+      .then((all) => res.json(all))
       .catch((err) => res.json(err));
 });
 
