@@ -169,7 +169,25 @@ router.get("/dogs/:dogId", (req, res, next) => {
     .catch((error) => res.json(error));
 });
 
-// PUT dogs/:dogId  -  Updates a specific project by id
+//  GET /cats/:catId -  Retrieves a specific CAT by id
+router.get("/cats/:catId", (req, res, next) => {
+  const { catId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(catId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  // console.log(dogId)
+  Cat.findOne({ _id: ObjectId(catId) })
+    .then((cat) => {
+      //console.log(req,dogId)
+
+      res.status(200).json(cat);
+    })
+    .catch((error) => res.json(error));
+});
+
+// PUT dogs/:dogId  -  Updates a specific DOG by id
 router.put("/dogs/:dogId", (req, res, next) => {
   const { dogId } = req.params;
 
@@ -180,6 +198,20 @@ router.put("/dogs/:dogId", (req, res, next) => {
 
   Dog.findByIdAndUpdate(dogId, req.body, { new: true })
     .then((updatedDog) => res.json(updatedDog))
+    .catch((error) => res.json(error));
+});
+
+// PUT cats/:catId  -  Updates a specific CAT by id
+router.put("/cats/:catId", (req, res, next) => {
+  const { catId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(catId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  Cat.findByIdAndUpdate(catId, req.body, { new: true })
+    .then((updatedCat) => res.json(updatedCat))
     .catch((error) => res.json(error));
 });
 
