@@ -10,7 +10,7 @@ const Map =require("../models/Map.model")
 const Site=require("../models/Site.model")
 const fileUploader = require("../config/cloudinary.config");
 const Stories = require("../models/Stories.model");
-
+const Donation=require("../models/Donation.model");
 //  POST Creates a new dog for adoption
 
 router.post("/adddog", (req, res, next) => {
@@ -85,6 +85,19 @@ router.post("/addstory", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
+
+router.post("/adddonation", (req, res, next) => {
+  console.log(req.body);
+  const { header, description, pictures, contactPerson } = req.body;
+
+  Donation.create({ header, description, pictures, contactPerson })
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
+
+
+
 
 router.post("/addmap", (req, res, next) => {
   console.log(req.body);
