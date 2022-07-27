@@ -105,10 +105,11 @@ router.post("/settings", (req, res, next) => {
 
 router.post("/addcontact", (req, res, next) => {
   console.log(req.body);
-  const { mapCode, description } = req.body;
+  const { firstName, lastName, email, phone, foto } = req.body;
 
-  Contact.create({ mapCode, description })
-    .then((response) => res.json(response))
+  Contact.create({ firstName, lastName, email, phone, foto })
+    .then((response) => {res.json(response)
+    console.log(res.json)})
     .catch((err) => res.json(err));
 });
 
@@ -127,7 +128,7 @@ router.delete("/cats/:catId", (req, res, next) => {
   Cat.findByIdAndRemove(catId)
     .then(() =>
       res.json({
-        message: `Project with ${projectId} is removed successfully.`,
+        message: `Project with ${catId} is removed successfully.`,
       })
     )
     .catch((error) => res.json(error));
@@ -146,7 +147,43 @@ router.delete("/dogs/:dogId", (req, res, next) => {
 
   Dog.findByIdAndRemove(dogId)
     .then(() =>
-      res.json({ message: `Dog with ${projectId} is removed successfully.` })
+      res.json({ message: `Dog with ${dogId} is removed successfully.` })
+    )
+    .catch((error) => res.json(error));
+});
+
+// DELETE  /stories/:storieId  -  Deletes a specific storie by id
+router.delete("/stories/:storieId", (req, res, next) => {
+  const { storieId } = req.params;
+
+  console.log(req.params);
+
+  if (!mongoose.Types.ObjectId.isValid(storieId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  Stories.findByIdAndRemove(storieId)
+    .then(() =>
+      res.json({ message: `Storie with ${storieId} is removed successfully.` })
+    )
+    .catch((error) => res.json(error));
+});
+
+// DELETE  /contacts/:contactId  -  Deletes a specific contact by id
+router.delete("/contacts/:contactId", (req, res, next) => {
+  const { contactId } = req.params;
+
+  console.log(req.params);
+
+  if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  Contact.findByIdAndRemove(contactId)
+    .then(() =>
+      res.json({ message: `Storie with ${contactId} is removed successfully.` })
     )
     .catch((error) => res.json(error));
 });
