@@ -25,6 +25,7 @@ router.post("/adddog", (req, res, next) => {
     description,
     admitionDate,
     views,
+    sex
   } = req.body;
 
   Dog.create({
@@ -37,6 +38,7 @@ router.post("/adddog", (req, res, next) => {
     description,
     admitionDate,
     views,
+    sex
   })
     .then((response) => {
       console.log(response);
@@ -55,10 +57,10 @@ router.post("/addcat", (req, res, next) => {
     weight,
     profilePicture,
     pictures,
-
     description,
     admitionDate,
     views,
+    sex
   } = req.body;
 
   Cat.create({
@@ -71,6 +73,7 @@ router.post("/addcat", (req, res, next) => {
     description,
     admitionDate,
     views,
+    sex
   })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
