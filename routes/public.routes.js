@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const Cat = require("../models/Cat.model.js")
 const Dog = require("../models/Dog.model.js")
-const Contact = require("../models/Contact.js")
+const Contact = require("../models/Contact.model.js")
 const Stories= require("../models/Stories.model.js")
 const Map =require("../models/Map.model.js")
 
