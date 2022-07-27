@@ -4,9 +4,12 @@ const { Schema, model } = mongoose;
 const contacSchema = new Schema({
   firstName: String,
   lastName: String,
-  email:  String,
+
+  email:String,
+
+
   phone: Number,
-  foto:String
+  foto:[String]
 });
 
 module.exports = model("Contact", contacSchema);

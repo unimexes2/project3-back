@@ -8,6 +8,13 @@ const Contact = require("../models/Contact.js")
 const Stories= require("../models/Stories.model.js")
 const Map =require("../models/Map.model.js")
 
+// GET  Retrieves all of contacts
+router.get("/contacts", (req, res, next) => {
+    Contact.find()
+      .then((allContacts) => res.json(allContacts))
+      .catch((err) => res.json(err));
+});
+
 // GET  Retrieves all of dogs
 router.get("/dogs", (req, res, next) => {
     Dog.find()
