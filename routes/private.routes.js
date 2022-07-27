@@ -63,7 +63,7 @@ sex,
     description,
     admitionDate,
     views,
-    sex
+
   } = req.body;
 
   Cat.create({
