@@ -108,7 +108,9 @@ router.post("/addcontact", (req, res, next) => {
   const { mapCode, description } = req.body;
 
   Contact.create({ mapCode, description })
-    .then((response) => res.json(response))
+    .then((response) => {res.json(response)
+    console.log(response)
+    })
     .catch((err) => res.json(err));
 });
 
