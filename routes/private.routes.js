@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ObjectId = require('mongodb').ObjectId
 const Cat = require("../models/Cat.model.js")
 const Dog = require("../models/Dog.model.js")
-const Contact = require("../models/Contact.js")
+const Contact = require("../models/Contact.model.js")
 const Map =require("../models/Map.model")
 const Site=require("../models/Site.model")
 const fileUploader = require("../config/cloudinary.config");
@@ -100,9 +100,6 @@ router.post("/adddonation", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
-
-
-
 
 
 router.post("/addmap", (req, res, next) => {
@@ -235,12 +232,26 @@ router.get("/cats/:catId", (req, res, next) => {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
-  // console.log(dogId)
   Cat.findOne({ _id: ObjectId(catId) })
     .then((cat) => {
-      //console.log(req,dogId)
 
       res.status(200).json(cat);
+    })
+    .catch((error) => res.json(error));
+});
+
+//  GET /contacts/:contactId -  Retrieves a specific CONTACT by id
+router.get("/contacts/:contactId", (req, res, next) => {
+  const { contactId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  Contact.findOne({ _id: ObjectId(contactId) })
+    .then((contact) => {
+
+      res.status(200).json(contact);
     })
     .catch((error) => res.json(error));
 });
@@ -270,6 +281,20 @@ router.put("/cats/:catId", (req, res, next) => {
 
   Cat.findByIdAndUpdate(catId, req.body, { new: true })
     .then((updatedCat) => res.json(updatedCat))
+    .catch((error) => res.json(error));
+});
+
+// PUT contacts/:contactId  -  Updates a specific CONTACT by id
+router.put("/contacts/:contactId", (req, res, next) => {
+  const { contactId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  Contact.findByIdAndUpdate(contactId, req.body, { new: true })
+    .then((updatedContact) => res.json(updatedContact))
     .catch((error) => res.json(error));
 });
 
