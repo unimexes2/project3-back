@@ -5,7 +5,8 @@ const contacSchema = new Schema({
   firstName: String,
   lastName: String,
   email: { type: String, unique: true, required: true },
-  phone: Number
+  phone: Number,
+  foto:String
 });
 
 module.exports = model("Contact", contacSchema);
