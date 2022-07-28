@@ -112,9 +112,9 @@ router.post("/addmap", (req, res, next) => {
 });
 router.post("/settings", (req, res, next) => {
   console.log(req.body);
-  const { mapCode, description } = req.body;
-
-  Site.create({ mapCode, description })
+  const { navbarlogo} = req.body;
+console.log(navbarlogo,"logo")
+  Site.create({ navbarlogo })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
