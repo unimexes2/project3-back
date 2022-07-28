@@ -3,7 +3,8 @@ const { Schema, model } = mongoose;
 
 const siteSchema = new Schema({
   logo: String,
-  navbarlogo: String,
+  navbarlogo: [String],
+  carusel:[String]
  
 
 });

@@ -113,11 +113,53 @@ router.post("/addmap", (req, res, next) => {
 router.post("/settings", (req, res, next) => {
   console.log(req.body);
   const { navbarlogo} = req.body;
+
 console.log(navbarlogo,"logo")
-  Site.create({ navbarlogo })
-    .then((response) => res.json(response))
-    .catch((err) => res.json(err));
+const  elemId  = "62e2dddb6a5a6365038a893d"
+
+Site.updateMany({_id:elemId}, { $set: { navbarlogo: [] }}, function(err, affected){
+  console.log('affected: ', affected);
+})
+.then(()=>{
+Site.findByIdAndUpdate(
+  elemId,
+   { $push: req.body } , { new: true }  
+ )
+ .then((updated) => console.log("jjj",updated))
+   .catch((error) => res.json(error))
+ 
+})
+
+
 });
+router.put("/carousel", (req, res, next) => {
+  const  elemId  = "62e2dddb6a5a6365038a893d"
+  console.log(req.body);
+
+  Site.updateMany({_id:elemId}, { $set: { carusel: [] }}, function(err, affected){
+    console.log('affected: ', affected);
+})
+.then(()=>{
+
+  Site.findByIdAndUpdate(
+    elemId,
+     { $push: req.body } , { new: true }  
+   )
+   .then((updated) => console.log("jjj",updated))
+     .catch((error) => res.json(error))
+   
+    
+   });
+
+
+})
+  
+
+
+
+
+
+
 
 
 router.post("/addcontact", (req, res, next) => {
