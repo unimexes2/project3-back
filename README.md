@@ -1,92 +1,240 @@
-### Instructions
+# FIND A FRIEND
 
-#### Instala dependencias
-- npm i
-#### Crea archivo .env y agrega variables de entorno
-![.env](https://user-images.githubusercontent.com/14861253/170860925-8da6984f-791a-4f9a-8747-d7e4a4917310.png)
-- crea un archivo .env en la raíz del proyecto con las siguientes variables de entorno: <br>
-  - TOKEN_SECRET = super-secret-password <br>
-  - MONGODB_URI = "ruta de la base de datos" -> opcional, mirad /project3-back/db/index.js para entenderlo<br>
-  (si tiene MONGODB_URI aceptará esta, sino || aceptará "mongodb://localhost...") <br>
-  ![MONGODB_URI](https://user-images.githubusercontent.com/14861253/170861097-88a6dc84-ed25-4290-9057-e5d3215aa461.png)
-#### Cambiar el nombre de la base de datos antes de la creación de esta
-- cambiar la línia en /project3-back/db/index.js por el nombre de la base de datos que queráis<br>
-  - "mongodb://localhost/project-management-server"; //siendo project-management-server el nombre de la base de datos que os creará una vez ejecutéis npm start, así que si queréis una web de películas, poned "project-movies-server" o si tenéis un nombre estilo "netflix" pensado, agregarlo aquí antes del npm start.
-  - OJO!, esto ha de ser antes de lanzar el siguiente paso
-#### Lanza el backend
-- npm start
+<br>
 
-#### Agregar archivo .env con:
-- TOKEN_SECRET = super-secret-password
-- MONGODB_URI=mongodb+srv://user:password.@redone.w7gjz.mongodb.net/?retryWrites=true&w=majority 
+## Description
 
----
-
-### API Documentation
-
-We will start our project by first documenting all of the routes and data models for our API. Following best practices we will use _verbs_ to specify the type of operation being done and _nouns_ when naming endpoints.
+It is an app created for the administration of animal shelters and to be able to offer people their animals for adoption.
+The application effectively allows the contact of the person interested in adopting a pet with the institution after having observed the animals to be adopted in a catalog. The app admin can perform all CRUD actions on Animals, Contacts, Maps, Stories, Location and Donations.
 
 #### Routes
 
-##### Project routes
+# Client / Frontend
 
-| HTTP verb | URL                        | Request body | Action                        |
-| --------- | -------------------------- | ------------ | ----------------------------- |
-| GET       | `/api/projects`            | (empty)      | Returns all the projects      |
-| POST      | `/api/projects`            | JSON         | Adds a new project            |
-| GET       | `/api/projects/:projectId` | (empty)      | Returns the specified project |
-| DELETE    | `/api/projects/:projectId` | (empty)      | Deletes the specified project |
+## React Router Routes (React App)
 
-##### Task routes
+      <Route exact path="/add"                                                ---> ADD ANIMAL (CAT OR DOG) TO THE DATABASE
 
-| HTTP verb | URL                  | Request body | Action                     |
-| --------- | -------------------- | ------------ | -------------------------- |
-| POST      | `/api/tasks`         | JSON         | Adds a new task            |
-| GET       | `/api/tasks/:taskId` | (empty)      | Returns the specified task |
-| PUT       | `/api/tasks/:taskId` | JSON         | Edits the specified task   |
-| DELETE    | `/api/tasks/:taskId` | (empty)      | Deletes the specified task |
+      <Route exact path="/"                                                   --->HOME PAGE
 
-##### Auth routes
+      <Route exact path="/addmap"                                             ---> ADD MAPS
+      <Route	exact path="/map"                                               ---> LIST MAPS
 
-| HTTP verb | URL            | Request Headers                 | Request Body              |
-| --------- | -------------- | ------------------------------- | ------------------------- |
-| POST      | `/auth/signup` | --                              | { email, password, name } |
-| POST      | `/auth/login`  | --                              | { email, password }       |
-| GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                        |
+      <Route exact path="/stories"                                            ---> LIST ALL STORIES
+      <Route exact path="/addstories"                                         ---> ADD NEW STORY
 
+      <Route	exact path="/addonation"                                        ---> ADD DONATION TO THE SHELTER
+      <Route	exact path="/donate"                                            ---> DONATION PAGE
 
+      <Route exact path="/settings"                                           ---> SETTINGS
 
-<hr>
+      <Route	exact path="/cats"                                              ---> LIST ALL CATS IN DB
+      <Route	exact path="/cat/:catId"                                        ---> RETRIEVES A SPECIFIC CAT BY ID
+      <Route	exact path="/cats/edit/:catId"                                  ---> EDIT CAT INFO
+
+      <Route	exact path="/dogs"                                              ---> LIST ALL DOGS
+      <Route exact path="/dog/:dogId"                                         ---> RETRIEVES A SPECIFIC DOG BY ID
+      <Route path="/dogs/edit/:dogId"                                         ---> EDIT DOG INFO
+
+      <Route	exact path="/contacts"                                          ---> LIST ALL CONTACT
+      <Route	exact path="/addcontact"                                        ---> ADD NEW CONTACT
+      <Route	exact path="/contacts/:contactId"                               ---> RETRIEVES A SPECIFIC CONTACT BY ID
+      <Route path="/contacts/edit/:contactId"                                 ---> EDIT CONTACT INFO
+
+      <Routeexact path="/dogadopted" element={<DogsAdopted />}/>              ---> SAVE ANIMALS IN A DATABASE AS ADOPTED ANIMALS
+      <Routeexact path="/catadopted" element={<CatsAdopted />}/>              ---> SAVE ANIMALS IN A DATABASE AS ADOPTED ANIMALS
+
+      <Route exact path="/signup"	                                            ---> CREATE NEW ADMIN
+      <Route exact path="/login"	                                            ---> LOGIN ADMIN
+
+## Components
+
+- LoginPage
+
+- SignupPage
+
+- NavBar
+
+- Map
+
+- ElementList
+
+- SearchForm
+
+- SearchFilters
+
+- ElementInfo
+
+- ElementDetails
+
+- ElementEdits
+
+<br>
+
+##### Server / Backend
+
+GET /api
+POST /api/auth/signup
+POST /api/auth/login
+GET /api/auth/verify
+GET /api/auth/verify
+POST /adddog
+POST /addcat
+POST /addstory
+POST /adddonation
+POST /addmap
+POST /settings
+POST /addcontact
+DELETE /cats/:catId
+DELETE /dogs/:dogId
+DELETE /stories/:storieId
+DELETE /contacts/:contactId
+GET /dogs/:dogId
+GET /cats/:catId
+GET /contacts/:contactId
+PUT /dogs/:dogId
+PUT /cats/:catId
+PUT /contacts/:contactId
+POST /upload
+POST /upload
+GET /contacts
+GET /donations
+GET /dogs
+GET /cats
+GET /map
+GET /stories
+
+<br>
 
 #### Models
 
-##### Project Model
+##### Admin Model
 
 ```js
 {
-  title: String,
-  description: String,
-  tasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ]
-}
-```
-
-##### Task Model
-
-```js
-{
-  title: String,
-  description: String,
-  project: { type: Schema.Types.ObjectId, ref: 'Project' }
-}
-```
-
-##### User Model
-
-```js
-{
+  firstName: String,
+  lastName: String,
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  name: { type: String, required: true },
+  dogsadded: [{ type: Schema.Types.ObjectId, ref: "Dog" }],
+  catsadded: [{ type: Schema.Types.ObjectId, ref: "Cat" }]
 }
 ```
 
+##### Cat Model
+
+```js
+{
+  name: String,
+  breed: String,
+  age: Number,
+  weight: String,
+  profilePicture: String,
+  pictures: [],
+  description: String,
+  admitionDate: String,
+  views: Number,
+  isAdopted:Boolean,
+  sex:String,
+  adminID: [{ type: Schema.Types.ObjectId, ref: "Admin" }],
+  contactPerson: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
+}
+```
+
+##### Contact Model
+
+```js
+{
+  firstName: String,
+  lastName: String,
+  email:String,
+  phone: Number,
+  foto:[String]
+}
+```
+
+##### Dog Model
+
+```js
+{
+  name: String,
+  breed: String,
+  age: Number,
+  weight: String,
+  profilePicture: String,
+  pictures: [String],
+  description: String,
+  admitionDate: String,
+  views: Number,
+  isAdopted:Boolean,
+  sex:String,
+  adminID: [{ type: Schema.Types.ObjectId, ref: "Admin" }],
+  contactPerson: [{ type: Schema.Types.ObjectId, ref: "Contact" }]
+}
+```
+
+##### Donation Model
+
+```js
+{
+    bankName: String,
+    account: String,
+    paypal: String,
+    bizum: String,
+
+}
+```
+
+##### Map Model
+
+```js
+{
+  mapCode: String,
+  description: String,
+
+}
+```
+
+##### Site Model
+
+```js
+{
+  logo: String,
+  navbarlogo: String,
+  devise: String,
+  carusel:String
+
+}
+```
+
+##### Stories Model
+
+```js
+{
+  header: String,
+  description: String,
+  pictures: [],
+}
+```
+
+<hr>
+
+## Links
+
+### Git
+
+The url to your repository and to your deployed project
+
+[Client repository Link - Front - AN](https://github.com/unimexes2/project3-front)
+[Client repository Link - Front - SL](https://github.com/sebalaca?tab=repositories)
+
+[Server repository Link - Back - AN](https://github.com/unimexes2/project3-back)
+[Server repository Link - Back - SL](https://github.com/sebalaca/project3-back)
+
+[Deployed App Link](https://protectorapalafols.herokuapp.com)
+
+### Slides
+
+The url to your presentation slides
+
+[Slides Link](https://docs.google.com/presentation/d/1C1nFHn_p-jDXPgdZyAHWCLcYkMdlJ6lIdLGIn0uQZrs/edit?usp=sharing)
