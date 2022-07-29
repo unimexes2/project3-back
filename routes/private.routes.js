@@ -11,6 +11,7 @@ const Site=require("../models/Site.model")
 const fileUploader = require("../config/cloudinary.config");
 const Stories = require("../models/Stories.model");
 const Donation=require("../models/Donation.model");
+const Admin=require("../models/Admin.model")
 //  POST Creates a new dog for adoption
 
 router.post("/adddog", (req, res, next) => {
@@ -91,6 +92,18 @@ router.post("/addstory", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
+
+router.get("/users", (req, res, next) => {
+  console.log(req.body);
+  const { header, description, pictures, contactPerson } = req.body;
+
+  Admin.find()
+    
+    .then((mapUser) => res.json(mapUser))
+    .catch((err) => res.json(err));
+});
+
+
 
 router.post("/adddonation", (req, res, next) => {
   console.log(req.body);
