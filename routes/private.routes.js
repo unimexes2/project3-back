@@ -198,6 +198,20 @@ router.delete("/cats/:catId", (req, res, next) => {
     return;
   }
 
+
+  router.delete("/user/:userId", (req, res, next) => {
+    const { userId } = req.params;
+  
+    console.log(req.params);
+  
+    if (!mongoose.Types.ObjectId.isValid(catId)) {
+      res.status(400).json({ message: "Specified id is not valid" });
+      return;
+    }
+  
+
+
+
   Cat.findByIdAndRemove(catId)
     .then(() =>
       res.json({
