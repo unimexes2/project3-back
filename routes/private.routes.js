@@ -196,7 +196,17 @@ router.delete("/cats/:catId", (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(catId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
-  }
+  }  Cat.findByIdAndRemove(catId)
+  .then(() =>
+    res.json({ message: `Dog with ${catId} is removed successfully.` })
+  )
+  .catch((error) => res.json(error));
+});
+
+
+
+
+
 
 
   router.delete("/user/:userId", (req, res, next) => {
@@ -204,7 +214,7 @@ router.delete("/cats/:catId", (req, res, next) => {
   
     console.log(req.params);
   
-    if (!mongoose.Types.ObjectId.isValid(catId)) {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
       res.status(400).json({ message: "Specified id is not valid" });
       return;
     }
@@ -212,10 +222,10 @@ router.delete("/cats/:catId", (req, res, next) => {
 
 
 
-  Cat.findByIdAndRemove(catId)
+  Admin.findByIdAndRemove(userId)
     .then(() =>
       res.json({
-        message: `Project with ${catId} is removed successfully.`,
+        message: `Project with ${userId} is removed successfully.`,
       })
     )
     .catch((error) => res.json(error));
@@ -378,4 +388,6 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
 
   res.json({ fileUrl: req.file.path });
 });
+
+
 module.exports = router;
